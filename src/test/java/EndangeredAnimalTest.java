@@ -84,12 +84,6 @@ public class EndangeredAnimalTest{
     assertEquals(EndangeredAnimal.findByName(testEndangeredAnimal2.getName()), testEndangeredAnimal2);
   }
 
-  @Test(expected=NullPointerException.class)
-  public void findbyName_throwsExceptionIfAnimalNotFound() {
-    EndangeredAnimal.findByName("toothy");
-  }
-
-
   @Test
   public void delete_deletesEntryInDatabase_0(){
     testEndangeredAnimal.save();

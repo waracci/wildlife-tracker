@@ -70,9 +70,6 @@ public class EndangeredAnimal extends Animal {
         .addParameter("name", name)
         .throwOnMappingFailure(false)
         .executeAndFetchFirst(EndangeredAnimal.class);
-      if(animal == null){
-        throw new NullPointerException("Animal name not found! Please add animal to database!");
-      }
       return animal;
     }
   }

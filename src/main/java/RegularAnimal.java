@@ -38,9 +38,6 @@ public class RegularAnimal extends Animal {
         .addParameter("name", name)
         .throwOnMappingFailure(false)
         .executeAndFetchFirst(RegularAnimal.class);
-      if(animal == null){
-        throw new NullPointerException("Animal name not found! Please add animal to database!");
-      }
       return animal;
     }
   }

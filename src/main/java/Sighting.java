@@ -2,6 +2,7 @@ import java.util.ArrayList;
 import java.util.List;
 import org.sql2o.*;
 import java.sql.Timestamp;
+import java.text.DateFormat;
 
 public class Sighting {
   private int id;
@@ -28,6 +29,10 @@ public class Sighting {
 
   public Timestamp getDateSighted() {
     return date_sighted;
+  }
+
+  public String getFormattedDate() {
+    return DateFormat.getDateTimeInstance().format(date_sighted);
   }
 
   @Override

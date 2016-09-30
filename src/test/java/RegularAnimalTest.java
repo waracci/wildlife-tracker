@@ -83,11 +83,6 @@ public class RegularAnimalTest{
     assertEquals(RegularAnimal.findByName(testRegularAnimal2.getName()), testRegularAnimal2);
   }
 
-  @Test(expected=NullPointerException.class)
-  public void findbyName_throwsExceptionIfAnimalNotFound() {
-    RegularAnimal.findByName("toothy");
-  }
-
   @Test
   public void delete_deletesEntryInDatabase_0(){
     testRegularAnimal.save();

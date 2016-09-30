@@ -5,6 +5,7 @@ import java.util.List;
 import org.sql2o.*;
 import java.util.Date;
 import java.sql.Timestamp;
+import java.text.DateFormat;
 
 public class SightingTest{
   Sighting testSighting;
@@ -86,6 +87,14 @@ public class SightingTest{
     Timestamp rightNow = new Timestamp(new Date().getTime());
     assertEquals(rightNow.getDate(), savedDate.getDate());
     assertEquals(rightNow.getHours(), savedDate.getHours());
+  }
+
+  @Test
+  public void getFormattedDate_returnsFormattedDate_Sighting() {
+    testSighting.save();
+    Sighting savedSighting = Sighting.find(testSighting.getId());
+    Timestamp rightNow = new Timestamp(new Date().getTime());
+    assertEquals(DateFormat.getDateTimeInstance().format(rightNow), savedSighting.getFormattedDate());
   }
 
   @Test
