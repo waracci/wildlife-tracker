@@ -68,5 +68,34 @@ public class Sighting {
     }
   }
 
+  public void delete(){
+    try(Connection con = DB.sql2o.open()){
+      String sql = "DELETE FROM sightings WHERE id=:id";
+      con.createQuery(sql).addParameter("id", this.id).executeUpdate();
+    }
+  }
 
+  public void addAnimal(Animal animal){
+    try(Connection con = DB.sql2o.open()){
+      String sql = "INSERT INTO animals_sightings (sighting_id, animal_id) VALUES(:sighting_id, :animal_id)";
+      con.createQuery(sql)
+        .addParameter("sighting_id", this.id)
+        .addParameter("animal_id", animal.getId())
+        .executeUpdate();
+    }
+  }
+
+  public List<RegularAnimal> getRegularAnimals(){
+    try(Connection con = DB.sql2o.open()){
+      String sql = "SELECT animals.* FROM animals JOIN animals_sightings ON (animals.id = animals_sightings.animal_id) WHERE animals_sightings.sighting_id = :id AND animals.endangered=false";
+      return con.createQuery(sql).addParameter("id", this.id).executeAndFetch(RegularAnimal.class);
+    }
+  }
+
+  public List<EndangeredAnimal> getEndangeredAnimals(){
+    try(Connection con = DB.sql2o.open()){
+      String sql = "SELECT animals.* FROM animals JOIN animals_sightings ON (animals.id = animals_sightings.animal_id) WHERE animals_sightings.sighting_id = :id AND animals.endangered=true";
+      return con.createQuery(sql).addParameter("id", this.id).executeAndFetch(EndangeredAnimal.class);
+    }
+  }
 }

@@ -81,4 +81,53 @@ public class SightingTest{
     Timestamp rightNow = new Timestamp(new Date().getTime());
     assertEquals(rightNow.getDay(), savedDate.getDay());
   }
+
+  @Test
+  public void delete_deletesEntryInDatabase_0(){
+    testSighting.save();
+    testSighting.delete();
+    assertEquals(0, Sighting.all().size());
+  }
+
+  @Test
+  public void addAnimal_addsRegularAnimalToSighting(){
+    testSighting.save();
+    RegularAnimal testRegularAnimal = new RegularAnimal("sloth");
+    testRegularAnimal.save();
+    testSighting.addAnimal(testRegularAnimal);
+    RegularAnimal  savedRegularAnimal = testSighting.getRegularAnimals().get(0);
+    assertTrue(testRegularAnimal.equals(savedRegularAnimal));
+  }
+
+  @Test
+  public void getRegularAnimals_returnsAllRegularAnimals_int(){
+    testSighting.save();
+    RegularAnimal testRegularAnimal = new RegularAnimal("sloth");
+    testRegularAnimal.save();
+    testSighting.addAnimal(testRegularAnimal);
+    List savedAnimals = testSighting.getRegularAnimals();
+    assertEquals(1, savedAnimals.size());
+    assertTrue(savedAnimals.contains(testRegularAnimal));
+  }
+
+  @Test
+  public void addAnimal_addsEndangeredAnimalToSighting(){
+    testSighting.save();
+    EndangeredAnimal testEndangeredAnimal = new EndangeredAnimal("panda", "healthy", "young");
+    testEndangeredAnimal.save();
+    testSighting.addAnimal(testEndangeredAnimal);
+    EndangeredAnimal  savedEndangeredAnimal = testSighting.getEndangeredAnimals().get(0);
+    assertTrue(testEndangeredAnimal.equals(savedEndangeredAnimal));
+  }
+
+  @Test
+  public void getEndangeredAnimals_returnsAllEndangeredAnimals_int(){
+    testSighting.save();
+    EndangeredAnimal testEndangeredAnimal = new EndangeredAnimal("panda", "healthy", "young");
+    testEndangeredAnimal.save();
+    testSighting.addAnimal(testEndangeredAnimal);
+    List savedAnimals = testSighting.getEndangeredAnimals();
+    assertEquals(1, savedAnimals.size());
+    assertTrue(savedAnimals.contains(testEndangeredAnimal));
+  }
 }

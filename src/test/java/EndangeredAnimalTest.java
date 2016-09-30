@@ -68,4 +68,22 @@ public class EndangeredAnimalTest{
     testEndangeredAnimal2.save();
     assertEquals(EndangeredAnimal.find(testEndangeredAnimal2.getId()), testEndangeredAnimal2);
   }
+
+  @Test
+  public void delete_deletesEntryInDatabase_0(){
+    testEndangeredAnimal.save();
+    testEndangeredAnimal.delete();
+    assertEquals(0, EndangeredAnimal.all().size());
+  }
+
+  @Test
+  public void getSightings_returnsAllSightings_int(){
+    testEndangeredAnimal.save();
+    Sighting testSighting = new Sighting("Here", "Steve");
+    testSighting.save();
+    testSighting.addAnimal(testEndangeredAnimal);
+    List savedSightings = testEndangeredAnimal.getSightings();
+    assertEquals(1, savedSightings.size());
+    assertTrue(savedSightings.contains(testSighting));
+  }
 }

@@ -40,5 +40,17 @@ public abstract class Animal {
     }
   }
 
+  public void delete(){
+    try(Connection con = DB.sql2o.open()){
+      String sql = "DELETE FROM animals WHERE id=:id";
+      con.createQuery(sql).addParameter("id", this.id).executeUpdate();
+    }
+  }
 
+  public List<Sighting> getSightings(){
+    try(Connection con = DB.sql2o.open()){
+      String sql = "SELECT sightings.* FROM sightings JOIN animals_sightings ON (sightings.id = animals_sightings.sighting_id) WHERE animals_sightings.animal_id = :id";
+      return con.createQuery(sql).addParameter("id", this.id).executeAndFetch(Sighting.class);
+    }
+  }
 }

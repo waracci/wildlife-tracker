@@ -67,4 +67,22 @@ public class RegularAnimalTest{
     testRegularAnimal2.save();
     assertEquals(RegularAnimal.find(testRegularAnimal2.getId()), testRegularAnimal2);
   }
+
+  @Test
+  public void delete_deletesEntryInDatabase_0(){
+    testRegularAnimal.save();
+    testRegularAnimal.delete();
+    assertEquals(0, RegularAnimal.all().size());
+  }
+
+  @Test
+  public void getSightings_returnsAllSightings_int(){
+    testRegularAnimal.save();
+    Sighting testSighting = new Sighting("Here", "Steve");
+    testSighting.save();
+    testSighting.addAnimal(testRegularAnimal);
+    List savedSightings = testRegularAnimal.getSightings();
+    assertEquals(1, savedSightings.size());
+    assertTrue(savedSightings.contains(testSighting));
+  }
 }
