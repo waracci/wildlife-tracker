@@ -14,11 +14,12 @@ public class EndangeredAnimal extends Animal {
   public static final String AGE_YOUNG = "young";
   public static final String AGE_ADULT = "adult";
 
-  public EndangeredAnimal(String name, String health, String age){
+  public EndangeredAnimal(String name, String species, String health, String age){
     this.name = name;
     endangered = true;
     this.health = health;
     this.age = age;
+    this.species = species;
   }
 
   public String getHealth() {
@@ -55,8 +56,24 @@ public class EndangeredAnimal extends Animal {
         .addParameter("id", id)
         .throwOnMappingFailure(false)
         .executeAndFetchFirst(EndangeredAnimal.class);
+      if(animal == null){
+        throw new IndexOutOfBoundsException("I'm sorry, I think this animal does not exist");
+      }
       return animal;
     }
   }
 
+  public static EndangeredAnimal findByName(String name) {
+    try(Connection con = DB.sql2o.open()) {
+      String sql = "SELECT * FROM animals where name=:name";
+      EndangeredAnimal animal = con.createQuery(sql)
+        .addParameter("name", name)
+        .throwOnMappingFailure(false)
+        .executeAndFetchFirst(EndangeredAnimal.class);
+      if(animal == null){
+        throw new NullPointerException("Animal name not found! Please add animal to database!");
+      }
+      return animal;
+    }
+  }
 }

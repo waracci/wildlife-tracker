@@ -4,8 +4,9 @@ import org.sql2o.*;
 
 public class RegularAnimal extends Animal {
 
-  public RegularAnimal(String name){
+  public RegularAnimal(String name, String species){
     this.name = name;
+    this.species = species;
     endangered = false;
   }
 
@@ -23,6 +24,23 @@ public class RegularAnimal extends Animal {
         .addParameter("id", id)
         .throwOnMappingFailure(false)
         .executeAndFetchFirst(RegularAnimal.class);
+      if(animal == null){
+        throw new IndexOutOfBoundsException("I'm sorry, I think this animal does not exist");
+      }
+      return animal;
+    }
+  }
+
+  public static RegularAnimal findByName(String name) {
+    try(Connection con = DB.sql2o.open()) {
+      String sql = "SELECT * FROM animals where name=:name";
+      RegularAnimal animal = con.createQuery(sql)
+        .addParameter("name", name)
+        .throwOnMappingFailure(false)
+        .executeAndFetchFirst(RegularAnimal.class);
+      if(animal == null){
+        throw new NullPointerException("Animal name not found! Please add animal to database!");
+      }
       return animal;
     }
   }

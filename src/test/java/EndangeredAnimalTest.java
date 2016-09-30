@@ -11,7 +11,7 @@ public class EndangeredAnimalTest{
 
   @Before
   public void setUp(){
-    testEndangeredAnimal = new EndangeredAnimal("panda", "healthy", "young");
+    testEndangeredAnimal = new EndangeredAnimal("fluffy", "panda", "healthy", "young");
   }
 
   @Test
@@ -21,13 +21,13 @@ public class EndangeredAnimalTest{
 
   @Test
   public void name_instantiatesCorrectly_true() {
-    assertEquals("panda", testEndangeredAnimal.getName());
+    assertEquals("fluffy", testEndangeredAnimal.getName());
   }
 
 
   @Test
   public void equals_returnsTrueIfPropertiesAreSame_true(){
-    EndangeredAnimal testEndangeredAnimal2 = new EndangeredAnimal("panda", "healthy", "young");
+    EndangeredAnimal testEndangeredAnimal2 = new EndangeredAnimal("fluffy", "panda", "healthy", "young");
     assertTrue(testEndangeredAnimal.equals(testEndangeredAnimal2));
   }
 
@@ -36,7 +36,7 @@ public class EndangeredAnimalTest{
     testEndangeredAnimal.save();
     EndangeredAnimal testEndangeredAnimal2 = null;
     try(Connection con = DB.sql2o.open()){
-      testEndangeredAnimal2 = con.createQuery("SELECT * FROM animals WHERE name='panda'")
+      testEndangeredAnimal2 = con.createQuery("SELECT * FROM animals WHERE name='fluffy'")
       .throwOnMappingFailure(false)
       .executeAndFetchFirst(EndangeredAnimal.class);
     }
@@ -48,7 +48,7 @@ public class EndangeredAnimalTest{
   @Test
   public void all_returnsAllInstancesOfPerson_true() {
     testEndangeredAnimal.save();
-    EndangeredAnimal testEndangeredAnimal2 = new EndangeredAnimal("red wolf", "sick", "old");
+    EndangeredAnimal testEndangeredAnimal2 = new EndangeredAnimal("scratchy", "red wolf", "sick", "old");
     testEndangeredAnimal2.save();
     assertEquals(true, EndangeredAnimal.all().get(0).equals(testEndangeredAnimal));
     assertEquals(true, EndangeredAnimal.all().get(1).equals(testEndangeredAnimal2));
@@ -64,10 +64,29 @@ public class EndangeredAnimalTest{
   @Test
   public void find_returnsEndangeredAnimalWithSameId_secondEndangeredAnimal() {
     testEndangeredAnimal.save();
-    EndangeredAnimal testEndangeredAnimal2 = new EndangeredAnimal("red wolf", "sick", "old");
+    EndangeredAnimal testEndangeredAnimal2 = new EndangeredAnimal("scratchy","red wolf", "sick", "old");
     testEndangeredAnimal2.save();
     assertEquals(EndangeredAnimal.find(testEndangeredAnimal2.getId()), testEndangeredAnimal2);
   }
+
+  @Test(expected=IndexOutOfBoundsException.class)
+  public void find_throwsExceptionIfAnimalNotFound() {
+    EndangeredAnimal.find(1);
+  }
+
+  @Test
+  public void findbyName_returnsEndangeredAnimalWithSameName_secondEndangeredAnimal() {
+    testEndangeredAnimal.save();
+    EndangeredAnimal testEndangeredAnimal2 = new EndangeredAnimal("scratchy","red wolf", "sick", "adult");
+    testEndangeredAnimal2.save();
+    assertEquals(EndangeredAnimal.findByName(testEndangeredAnimal2.getName()), testEndangeredAnimal2);
+  }
+
+  @Test(expected=NullPointerException.class)
+  public void findbyName_throwsExceptionIfAnimalNotFound() {
+    EndangeredAnimal.findByName("toothy");
+  }
+
 
   @Test
   public void delete_deletesEntryInDatabase_0(){

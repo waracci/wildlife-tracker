@@ -11,7 +11,7 @@ public class RegularAnimalTest{
 
   @Before
   public void setUp(){
-    testRegularAnimal = new RegularAnimal("sloth");
+    testRegularAnimal = new RegularAnimal("sloth", "sloth");
   }
 
   @Test
@@ -27,7 +27,7 @@ public class RegularAnimalTest{
 
   @Test
   public void equals_returnsTrueIfPropertiesAreSame_true(){
-    RegularAnimal testRegularAnimal2 = new RegularAnimal("sloth");
+    RegularAnimal testRegularAnimal2 = new RegularAnimal("sloth", "sloth");
     assertTrue(testRegularAnimal.equals(testRegularAnimal2));
   }
 
@@ -47,7 +47,7 @@ public class RegularAnimalTest{
   @Test
   public void all_returnsAllInstancesOfPerson_true() {
     testRegularAnimal.save();
-    RegularAnimal testRegularAnimal2 = new RegularAnimal("squirrel");
+    RegularAnimal testRegularAnimal2 = new RegularAnimal("bitey", "squirrel");
     testRegularAnimal2.save();
     assertEquals(true, RegularAnimal.all().get(0).equals(testRegularAnimal));
     assertEquals(true, RegularAnimal.all().get(1).equals(testRegularAnimal2));
@@ -63,9 +63,27 @@ public class RegularAnimalTest{
   @Test
   public void find_returnsRegularAnimalWithSameId_secondRegularAnimal() {
     testRegularAnimal.save();
-    RegularAnimal testRegularAnimal2 = new RegularAnimal("squirrel");
+    RegularAnimal testRegularAnimal2 = new RegularAnimal("bitey", "squirrel");
     testRegularAnimal2.save();
     assertEquals(RegularAnimal.find(testRegularAnimal2.getId()), testRegularAnimal2);
+  }
+
+  @Test(expected=IndexOutOfBoundsException.class)
+  public void find_throwsExceptionIfAnimalNotFound() {
+    RegularAnimal.find(1);
+  }
+
+  @Test
+  public void findbyName_returnsRegularAnimalWithSameName_secondRegularAnimal() {
+    testRegularAnimal.save();
+    RegularAnimal testRegularAnimal2 = new RegularAnimal("bitey", "squirrel");
+    testRegularAnimal2.save();
+    assertEquals(RegularAnimal.findByName(testRegularAnimal2.getName()), testRegularAnimal2);
+  }
+
+  @Test(expected=NullPointerException.class)
+  public void findbyName_throwsExceptionIfAnimalNotFound() {
+    RegularAnimal.findByName("toothy");
   }
 
   @Test

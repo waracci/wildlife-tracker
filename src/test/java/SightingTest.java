@@ -92,7 +92,7 @@ public class SightingTest{
   @Test
   public void addAnimal_addsRegularAnimalToSighting(){
     testSighting.save();
-    RegularAnimal testRegularAnimal = new RegularAnimal("sloth");
+    RegularAnimal testRegularAnimal = new RegularAnimal("scratchy","sloth");
     testRegularAnimal.save();
     testSighting.addAnimal(testRegularAnimal);
     RegularAnimal  savedRegularAnimal = testSighting.getRegularAnimals().get(0);
@@ -102,7 +102,7 @@ public class SightingTest{
   @Test
   public void getRegularAnimals_returnsAllRegularAnimals_int(){
     testSighting.save();
-    RegularAnimal testRegularAnimal = new RegularAnimal("sloth");
+    RegularAnimal testRegularAnimal = new RegularAnimal("scratchy","sloth");
     testRegularAnimal.save();
     testSighting.addAnimal(testRegularAnimal);
     List savedAnimals = testSighting.getRegularAnimals();
@@ -113,7 +113,7 @@ public class SightingTest{
   @Test
   public void addAnimal_addsEndangeredAnimalToSighting(){
     testSighting.save();
-    EndangeredAnimal testEndangeredAnimal = new EndangeredAnimal("panda", "healthy", "young");
+    EndangeredAnimal testEndangeredAnimal = new EndangeredAnimal("scratchy","panda", "healthy", "young");
     testEndangeredAnimal.save();
     testSighting.addAnimal(testEndangeredAnimal);
     EndangeredAnimal  savedEndangeredAnimal = testSighting.getEndangeredAnimals().get(0);
@@ -123,7 +123,7 @@ public class SightingTest{
   @Test
   public void getEndangeredAnimals_returnsAllEndangeredAnimals_int(){
     testSighting.save();
-    EndangeredAnimal testEndangeredAnimal = new EndangeredAnimal("panda", "healthy", "young");
+    EndangeredAnimal testEndangeredAnimal = new EndangeredAnimal("scratchy","panda", "healthy", "young");
     testEndangeredAnimal.save();
     testSighting.addAnimal(testEndangeredAnimal);
     List savedAnimals = testSighting.getEndangeredAnimals();

@@ -5,6 +5,7 @@ import org.sql2o.*;
 public abstract class Animal {
   public int id;
   public String name;
+  public String species;
   public boolean endangered;
 
   public int getId(){
@@ -13,6 +14,10 @@ public abstract class Animal {
 
   public String getName() {
     return name;
+  }
+
+  public String getSpecies() {
+    return species;
   }
 
   public boolean isEndangered() {
@@ -25,16 +30,18 @@ public abstract class Animal {
       return false;
     } else {
       Animal newAnimal = (Animal) otherAnimal;
-      return this.id == newAnimal.id && this.name.equals(newAnimal.name);
+      return this.id == newAnimal.id && this.name.equals(newAnimal.name) &&
+        this.species.equals(newAnimal.species);
     }
   }
 
   public void save() {
     try(Connection con = DB.sql2o.open()) {
-      String sql = "INSERT INTO animals (name, endangered) VALUES (:name, :endangered)";
+      String sql = "INSERT INTO animals (name, endangered, species) VALUES (:name, :endangered, :species)";
       this.id = (int) con.createQuery(sql, true)
         .addParameter("name", this.name)
         .addParameter("endangered", this.endangered)
+        .addParameter("species", this.species)
         .executeUpdate()
         .getKey();
     }
