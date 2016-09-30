@@ -1,0 +1,84 @@
+import org.junit.*;
+import static org.junit.Assert.*;
+import java.util.ArrayList;
+import java.util.List;
+import org.sql2o.*;
+import java.util.Date;
+import java.sql.Timestamp;
+
+public class SightingTest{
+  Sighting testSighting;
+  @Rule
+  public DatabaseRule database = new DatabaseRule();
+
+  @Before
+  public void setUp(){
+    testSighting = new Sighting("Here", "Steve");
+  }
+
+  @Test
+  public void sightings_instantiatesCorrectly_true() {
+    assertTrue(testSighting instanceof Sighting);
+  }
+
+  @Test
+  public void location_instantiatesCorrectly_true() {
+    assertEquals("Here", testSighting.getLocation());
+  }
+
+  @Test
+  public void rangername_instantiatesCorrectly_true() {
+    assertEquals("Steve", testSighting.getRangerName());
+  }
+
+  @Test
+  public void equals_returnsTrueIfPropertiesAreSame_true(){
+    Sighting testSighting2 = new Sighting("Here", "Steve");
+    assertTrue(testSighting.equals(testSighting2));
+  }
+
+  @Test
+  public void save_insertsSightingIntoDatabase_Sighting() {
+    testSighting.save();
+    Sighting testSighting2 = null;
+    try(Connection con = DB.sql2o.open()){
+      testSighting2 = con.createQuery("SELECT * FROM sightings WHERE location='Here'")
+      .executeAndFetchFirst(Sighting.class);
+    }
+    assertTrue(testSighting2.equals(testSighting));
+  }
+
+
+
+  @Test
+  public void all_returnsAllInstancesOfPerson_true() {
+    testSighting.save();
+    Sighting testSighting2 = new Sighting("There", "Joe");
+    testSighting2.save();
+    assertEquals(true, Sighting.all().get(0).equals(testSighting));
+    assertEquals(true, Sighting.all().get(1).equals(testSighting2));
+  }
+
+  @Test
+  public void save_assignsIdToSighting() {
+    testSighting.save();
+    Sighting testSighting2 = Sighting.all().get(0);
+    assertEquals(testSighting.getId(), testSighting2.getId());
+  }
+
+  @Test
+  public void find_returnsSightingWithSameId_secondSighting() {
+    testSighting.save();
+    Sighting testSighting2 = new Sighting("There", "Joe");
+    testSighting2.save();
+    assertEquals(Sighting.find(testSighting2.getId()), testSighting2);
+  }
+
+  @Test
+  public void save_insertsCurrentDateIntoDatabase_Sighting() {
+    testSighting.save();
+    Timestamp savedDate = Sighting.find(testSighting.getId()).getDateSighted();
+    Timestamp rightNow = new Timestamp(new Date().getTime());
+    assertEquals(rightNow.getDay(), savedDate.getDay());
+  }
+}
