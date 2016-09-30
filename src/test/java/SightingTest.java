@@ -84,7 +84,8 @@ public class SightingTest{
     testSighting.save();
     Timestamp savedDate = Sighting.find(testSighting.getId()).getDateSighted();
     Timestamp rightNow = new Timestamp(new Date().getTime());
-    assertEquals(rightNow.getDay(), savedDate.getDay());
+    assertEquals(rightNow.getDate(), savedDate.getDate());
+    assertEquals(rightNow.getHours(), savedDate.getHours());
   }
 
   @Test
@@ -144,4 +145,20 @@ public class SightingTest{
     assertEquals(testSighting2, Sighting.allByDate().get(0));
   }
 
+  @Test
+  public void mostRecent_returnsFiveMostRecent_Sighting(){
+    testSighting.save();
+    Sighting testSighting2 = new Sighting("There", "Joe");
+    testSighting2.save();
+    Sighting testSighting3 = new Sighting("There", "Joe");
+    testSighting3.save();
+    Sighting testSighting4 = new Sighting("There", "Joe");
+    testSighting4.save();
+    Sighting testSighting5 = new Sighting("There", "Joe");
+    testSighting5.save();
+    Sighting testSighting6 = new Sighting("There", "Joe");
+    testSighting6.save();
+    assertEquals(testSighting6, Sighting.mostRecent().get(0));
+    assertFalse(Sighting.mostRecent().contains(testSighting));
+  }
   }

@@ -24,6 +24,10 @@ public class RegularAnimalTest{
     assertEquals("sloth", testRegularAnimal.getName());
   }
 
+  @Test
+  public void species_instantiatesCorrectly_true() {
+    assertEquals("sloth", testRegularAnimal.getSpecies());
+  }
 
   @Test
   public void equals_returnsTrueIfPropertiesAreSame_true(){
@@ -41,8 +45,6 @@ public class RegularAnimalTest{
     }
     assertTrue(testRegularAnimal2.equals(testRegularAnimal));
   }
-
-
 
   @Test
   public void all_returnsAllInstancesOfPerson_true() {

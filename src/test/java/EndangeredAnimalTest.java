@@ -24,6 +24,10 @@ public class EndangeredAnimalTest{
     assertEquals("fluffy", testEndangeredAnimal.getName());
   }
 
+  @Test
+  public void species_instantiatesCorrectly_true() {
+    assertEquals("panda", testEndangeredAnimal.getSpecies());
+  }
 
   @Test
   public void equals_returnsTrueIfPropertiesAreSame_true(){
@@ -42,8 +46,6 @@ public class EndangeredAnimalTest{
     }
     assertTrue(testEndangeredAnimal2.equals(testEndangeredAnimal));
   }
-
-
 
   @Test
   public void all_returnsAllInstancesOfPerson_true() {

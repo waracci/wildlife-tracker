@@ -65,6 +65,13 @@ public class Sighting {
     }
   }
 
+  public static List<Sighting> mostRecent() {
+    String sql = "SELECT * FROM sightings WHERE date_sighted BETWEEN now() - interval '24 hours' AND now() ORDER BY date_sighted DESC LIMIT 5";
+    try(Connection con = DB.sql2o.open()) {
+      return con.createQuery(sql).executeAndFetch(Sighting.class);
+    }
+  }
+
   public static Sighting find(int id) {
     try(Connection con = DB.sql2o.open()) {
       String sql = "SELECT * FROM sightings where id=:id";
