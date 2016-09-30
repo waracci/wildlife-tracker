@@ -3,7 +3,7 @@
 #if($sightings.size() > 0)
     #foreach($sighting in $sightings)
     <div>
-      <p><a href="/sighting/$sighting.getId()">Date: $sighting.getFormattedDate()</a></p>
+      <p><a href="/sightings/$sighting.getId()">Date: $sighting.getFormattedDate()</a></p>
       <p>Ranger: $sighting.getRangerName()</p>
       <p>Location: $sighting.getLocation()</p>
       <p>$sighting.getRegularAnimals().size() animals</p>

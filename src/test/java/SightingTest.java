@@ -105,6 +105,16 @@ public class SightingTest{
   }
 
   @Test
+  public void delete_deletesSightingAssociations(){
+    testSighting.save();
+    RegularAnimal testRegularAnimal = new RegularAnimal("Steve", "bee");
+    testRegularAnimal.save();
+    testSighting.addAnimal(testRegularAnimal);
+    testSighting.delete();
+    assertEquals(0, testRegularAnimal.getSightings().size());
+  }
+
+  @Test
   public void addAnimal_addsRegularAnimalToSighting(){
     testSighting.save();
     RegularAnimal testRegularAnimal = new RegularAnimal("scratchy","sloth");

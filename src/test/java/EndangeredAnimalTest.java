@@ -92,6 +92,16 @@ public class EndangeredAnimalTest{
   }
 
   @Test
+  public void delete_deletesSightingAssociations(){
+    testEndangeredAnimal.save();
+    Sighting sighting = new Sighting("here", "Steve");
+    sighting.addAnimal(testEndangeredAnimal);
+    sighting.save();
+    testEndangeredAnimal.delete();
+    assertEquals(0, sighting.getEndangeredAnimals().size());
+  }
+
+  @Test
   public void getSightings_returnsAllSightings_int(){
     testEndangeredAnimal.save();
     Sighting testSighting = new Sighting("Here", "Steve");

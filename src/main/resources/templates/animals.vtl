@@ -1,10 +1,13 @@
 <div class="row">
   <div class="col-sm-6">
     <h3>Endangered Animals</h3>
+    #if($en)
+      #thing_to_do
+    #end
     #if($endangered_animals.size() > 0)
       <ul>
         #foreach($endangered_animal in $endangered_animals)
-          <li><a href="/endangered_animals/$endangered_animal.getId()">Name: $endangered_animal.getName() Species: $endangered_animal.getSpecies()</a></li>
+          <li><a href="/animals/endangered/$endangered_animal.getId()">Name: $endangered_animal.getName() Species: $endangered_animal.getSpecies()</a></li>
         #end
       </ul>
     #else

@@ -51,6 +51,8 @@ public abstract class Animal {
     try(Connection con = DB.sql2o.open()){
       String sql = "DELETE FROM animals WHERE id=:id";
       con.createQuery(sql).addParameter("id", this.id).executeUpdate();
+      String joinSql = "DELETE FROM animals_sightings WHERE animal_id=:id";
+      con.createQuery(joinSql).addParameter("id", this.id).executeUpdate();
     }
   }
 
