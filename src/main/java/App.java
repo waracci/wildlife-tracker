@@ -113,7 +113,7 @@ public class App {
       EndangeredAnimal animal = EndangeredAnimal.find(Integer.parseInt(request.params("id")));
       model.put("animal", animal);
       model.put("rangerName", request.session().attribute("rangerName"));
-      model.put("template", "templates/animal-form.vtl");
+      model.put("template", "templates/animal.vtl");
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
 
@@ -194,6 +194,15 @@ public class App {
       model.put("template", "templates/sighting.vtl");
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
+
+    //delete sighting
+    post("/sightings/:id/delete", (request, response) -> {
+      Map<String, Object> model = new HashMap<String, Object>();
+      Sighting sighting = Sighting.find(Integer.parseInt(request.params("id")));
+      sighting.delete();
+      response.redirect("/sightings");
+      return null;
+    });
 
     //exception handling
     exception(NullPointerException.class, (exc, request, response) -> {
