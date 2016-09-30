@@ -16,8 +16,6 @@ div.row {
   margin: 1rem -5px;
 }
 
-
-
 div.col-sm-6 {
   background-color: #af9164;
   border: 5px solid #2b2118;
@@ -34,6 +32,10 @@ div.col-sm-6 h3, div.col-sm-6 h4, div.col-sm-6 h5 {
 div.col-sm-6 ul {
   width: 90%;
   margin: 0 auto;
+}
+
+div.sightings{
+  text-align: center;
 }
 
 div.sighting {
@@ -55,8 +57,8 @@ a: hover {
 
 form {
   background-color: #af9164;
-  width: 60%;
   border-radius: 5px;
+  width: 95%;
   margin: 1rem auto;
   padding: 1rem;
   color: #2b2118;
@@ -64,7 +66,6 @@ form {
 
 form.manage {
   background-color: transparent;
-  width: 60%;
   margin: 1rem auto;
   padding: 1rem;
   text-align: center;
@@ -82,6 +83,10 @@ ul {
   text-align: center;
   color: #b3b6b7;
   border: 2px solid #b3b6b7
+}
+
+h1, h2, h3 {
+  font-family: 'Acme', sans-serif;
 }
 
 h3, h2, h4, h5 {
@@ -135,20 +140,28 @@ input[type="checkbox"]:checked ~ .reveal-if-active {
 
   .sighting{
     display:inline-block;
-    width: 33%;
+    width: 45%;
   }
 
   ul {
-    width: 65%;
+    width: 70%;
+  }
+
+  form {
+    width: 80%;
   }
 }
 
 @media screen and (min-width: 992px){
   .sighting{
-    width: 50%;
+    width: 30%;
   }
 
   ul {
     width: 50%;
+  }
+
+  form {
+    width: 60%;
   }
 }

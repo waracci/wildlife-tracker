@@ -84,7 +84,7 @@ public class App {
       model.put("HEALTH_ILL", EndangeredAnimal.HEALTH_ILL);
       model.put("AGE_BABBY", EndangeredAnimal.AGE_BABBY);
       model.put("AGE_YOUNG", EndangeredAnimal.AGE_YOUNG);
-      model.put("AGE_ADULT", EndangeredAnimal.AGE_BABBY);
+      model.put("AGE_ADULT", EndangeredAnimal.AGE_ADULT);
       model.put("rangerName", request.session().attribute("rangerName"));
       model.put("template", "templates/animal-form.vtl");
       return new ModelAndView(model, layout);
@@ -167,7 +167,7 @@ public class App {
     post("/sightings/new", (request, response) -> {
       String rangerName = request.session().attribute("rangerName");
       String location = request.queryParams("location");
-      Sighting sighting = new Sighting(rangerName, location);
+      Sighting sighting = new Sighting(location, rangerName);
       sighting.save();
       String[] animalArray = request.queryParams("animal-names").split(",");
       Animal animal;
