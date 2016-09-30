@@ -46,7 +46,6 @@ public class App {
     get("/animals/new", (request, response) -> {
       Map<String, Object> model = new HashMap<String, Object>();
       model.put("rangerName", request.session().attribute("rangerName"));
-      model.put("endangered", EndangeredAnimal.class);
       model.put("template", "templates/animal-form.vtl");
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
@@ -105,14 +104,15 @@ public class App {
       return null;
     });
 
-    exception(NullPointerException.class, (exc, req, res) -> {
-      res.status(500);
+    exception(NullPointerException.class, (exc, request, response) -> {
+      response.status(500);
       VelocityTemplateEngine engine = new VelocityTemplateEngine();
       Map<String, Object> model = new HashMap<String, Object>();
+      model.put("rangerName", request.session().attribute("rangerName"));
       model.put("message", exc.getMessage());
       model.put("template", "templates/notfound.vtl");
       String html = engine.render(new ModelAndView(model, layout));
-      res.body(html);
+      response.body(html);
     });
   }
 }

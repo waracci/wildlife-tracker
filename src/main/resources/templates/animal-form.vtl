@@ -8,22 +8,20 @@
     <label for="species">Species: </label>
     <input type="text" name="species" class="form-control">
   </div>
-  <div class="checkbox">
-    <label for="species">
-    <input type="checkbox" name="endangered"> Endangered?
-    </label>
-  </div>
-  <div class="form-group">
+
+  <input type="checkbox" name="endangered">
+  <label for="species">Endangered?</label>
+  <div class="form-group reveal-if-active">
     <label for="health">Health (as far you can tell)</label>
-    <select class="form-control reveal-if-active" name="health">
+    <select class="form-control" name="health">
       <option>$endangered.HEALTH_HEALTHY</option>
       <option>$endangered.HEALTH_OK</option>
       <option>$endangered.HEALTH_ILL</option>
     </select>
   </div>
-  <div class="form-group">
+  <div class="form-group reveal-if-active">
     <label for="age">Age (as far you can tell)</label>
-    <select class="form-control reveal-if-active" name="age">
+    <select class="form-control" name="age">
       <option>$endangered.AGE_BABBY</option>
       <option>$endangered.AGE_YOUNG</option>
       <option>$endangered.AGE_ADULT</option>
