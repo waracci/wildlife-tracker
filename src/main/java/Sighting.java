@@ -58,13 +58,23 @@ public class Sighting {
     }
   }
 
+  public static List<Sighting> allByDate() {
+    String sql = "SELECT * FROM sightings ORDER BY date_sighted DESC";
+    try(Connection con = DB.sql2o.open()) {
+      return con.createQuery(sql).executeAndFetch(Sighting.class);
+    }
+  }
+
   public static Sighting find(int id) {
     try(Connection con = DB.sql2o.open()) {
       String sql = "SELECT * FROM sightings where id=:id";
-      Sighting animal = con.createQuery(sql)
+      Sighting sighting = con.createQuery(sql)
         .addParameter("id", id)
         .executeAndFetchFirst(Sighting.class);
-      return animal;
+      if(sighting == null){
+        throw new IndexOutOfBoundsException("I'm sorry, I think this sighting does not exist");
+      }
+      return sighting;
     }
   }
 

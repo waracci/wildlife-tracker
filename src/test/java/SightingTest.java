@@ -74,6 +74,11 @@ public class SightingTest{
     assertEquals(Sighting.find(testSighting2.getId()), testSighting2);
   }
 
+  @Test(expected=IndexOutOfBoundsException.class)
+  public void find_throwsExceptionIfSightingNotFound() {
+    Sighting.find(1);
+  }
+
   @Test
   public void save_insertsCurrentDateIntoDatabase_Sighting() {
     testSighting.save();
@@ -130,4 +135,13 @@ public class SightingTest{
     assertEquals(1, savedAnimals.size());
     assertTrue(savedAnimals.contains(testEndangeredAnimal));
   }
-}
+
+  @Test
+  public void allByDate_sortsSightingsListByMostRecent_Sighting(){
+    testSighting.save();
+    Sighting testSighting2 = new Sighting("There", "Joe");
+    testSighting2.save();
+    assertEquals(testSighting2, Sighting.allByDate().get(0));
+  }
+
+  }
