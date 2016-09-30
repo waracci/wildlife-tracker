@@ -11,14 +11,14 @@
       <div class="jumbotron">
         <h1>Wildlife Tracker</h1>
         #if($rangerName)
-        <div class="links container">
-            <p><a href="/">Home</a></p>
-            <p><a href="/sightings">All Sightings</a></p>
-            <p><a href="/sightings/new">Add Sighting</a></p>
-            <p><a href="/animals">All Animals</a></p>
-            <p><a href="/animals/new">Add Animals</a></p>
-            <p><a href="/logout">Log out</a></p>
-        </div>
+          <div class="link-bar">
+            <div><p><a href="/">Home</a></p></div>
+            <div><p><a href="/sightings">All Sightings</a></p></div>
+            <div><p><a href="/sightings/new">Add Sighting</p></a></div>
+            <div><p><a href="/animals">All Animals</a></p></div>
+            <div><p><a href="/animals/new">Add Animals</a></p></div>
+            <div><p><a href="/logout">Log out</a></p></div>
+          </div>
           #end
       </div>
       #parse( $template )

@@ -9,6 +9,7 @@ public class App {
     staticFileLocation("/public");
     String layout = "templates/layout.vtl";
 
+    //before filters
     before("/sightings/*", (request, response) -> {
       String rangerName= request.session().attribute("rangerName");
       if(rangerName==null){
@@ -149,7 +150,7 @@ public class App {
     get("/sightings", (request, response) -> {
       Map<String, Object> model = new HashMap<String, Object>();
       model.put("rangerName", request.session().attribute("rangerName"));
-      model.put("sightings", Sighting.all());
+      model.put("sightings", Sighting.allByDate());
       model.put("template", "templates/sightings.vtl");
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
