@@ -1,0 +1,167 @@
+body {
+  font-family: 'David Libre', serif;
+  background-image: url(/images/forest.jpg);
+  background-color: #af9164;
+  color: #f7f3e3
+}
+
+.container{
+  background-color:#2b2118;
+  margin-top: 1rem;
+  border: 2px solid #b3b6b7;
+  border-radius: 5px;
+}
+
+div.row {
+  margin: 1rem -5px;
+}
+
+div.col-sm-6 {
+  background-color: #af9164;
+  border: 5px solid #2b2118;
+  border-radius: 10px;
+  font-size: large;
+  color:#af9164;
+  padding-bottom: 1rem;
+}
+
+div.col-sm-6 h3, div.col-sm-6 h4, div.col-sm-6 h5 {
+  color: #6f1a07;
+}
+
+div.col-sm-6 ul {
+  width: 90%;
+  margin: 0 auto;
+}
+
+div.sightings{
+  text-align: center;
+}
+
+div.sighting {
+  background-color: #af9164;
+  color: #6f1a07;
+  margin: 1rem;
+  padding: 1rem;
+  border-radius: 5px;
+  font-size: large;
+}
+
+a {
+  color: #2a6496;
+}
+
+a: hover {
+  color: forestgreen;
+}
+
+form {
+  background-color: #af9164;
+  border-radius: 5px;
+  width: 95%;
+  margin: 1rem auto;
+  padding: 1rem;
+  color: #2b2118;
+}
+
+form.manage {
+  background-color: transparent;
+  margin: 1rem auto;
+  padding: 1rem;
+  text-align: center;
+}
+
+ul {
+  width: 80%;
+  margin: 1rem auto;
+  font-size: large;
+}
+
+.container .jumbotron {
+  margin-top: 1rem;
+  background-color: #6f1a07;
+  text-align: center;
+  color: #b3b6b7;
+  border: 2px solid #b3b6b7
+}
+
+h1, h2, h3 {
+  font-family: 'Acme', sans-serif;
+}
+
+h3, h2, h4, h5 {
+  color: #b3b6b7;
+  text-align: center;
+}
+
+.link-bar {
+  text-align: center;
+}
+
+.link-bar div{
+  width: 130px;
+  display: inline-block;
+}
+
+.jumbotron div.links {
+  text-align: center;
+}
+
+.jumbotron p{
+  display: inline;
+  margin-left: .5rem;
+  margin-right: .5rem;
+}
+
+.reveal-if-active {
+  opacity: 0;
+  max-height: 0;
+  overflow: hidden;
+}
+
+input[type="checkbox"]:checked ~ .reveal-if-active {
+  opacity: 1;
+  max-height: 100px;
+  overflow: visible;
+}
+
+/*MEDIA QUERIES*/
+
+@media screen and (min-width: 768px) {
+  .row.is-flex {
+      display: flex;
+      flex-wrap: wrap;
+  }
+
+  .row.is-flex > [class*='col-'] {
+      display: flex;
+      flex-direction: column;
+  }
+
+  .sighting{
+    display:inline-block;
+    width: 45%;
+  }
+
+  ul {
+    width: 70%;
+  }
+
+  form {
+    width: 80%;
+  }
+}
+
+@media screen and (min-width: 992px){
+  .sighting{
+    width: 30%;
+  }
+
+  ul {
+    width: 50%;
+  }
+
+  form {
+    width: 60%;
+  }
+}
