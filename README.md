@@ -1,38 +1,48 @@
-# _Wildlife Tracker_
+# WildLife Tracker
 
-#### By _Ewa Manek_
+WildLife Tracker: An app that aims at tracking the wildlife numbers at a local animal park, Rangers are able to spot animals, both endangered and non-endangered then record them in a sightings record.
 
-## Description
+## Getting Started
 
-_Web App for tracking wildlife sightings with Java backend using Spark with Velocity and Postgresql_
+Git clone.
+gradle build
+create the postgres database
 
-## Setup/Installation Requirements
+### Prerequisites
 
-* _Copy the repository from GitHub_
-* _Make sure you have gradle and postgresql installed!_
-* _Use the following commands in psql to create the postgres database or just create the wildlife_tracker database and run 'psql  wildlife_tracker < wildlife_tracker.sql'_
-  * CREATE DATABASE wildlife_tracker;
-  * CREATE TABLE animals (id serial PRIMARY KEY, name varchar, species varchar, health varchar, age varchar, endangered boolean);
-  * CREATE TABLE sightings (id serial PRIMARY KEY, location varchar, rangerName varchar, date_sighted timestamp);
-  * CREATE TABLE animals_sightings (id serial PRIMARY KEY, animal_id int, sighting_id int);
-* _gradle will download and install junit and spark_
-* _the 'gradle run' command will deploy the site to port 4567 by default_
+```
+Java 8
+Gradle
+PostGres database
+Git (Obv)
+```
 
-## Technologies used
+### Installing
+list of databases and table names:
+```
+Production Database: wildlife_tracker
+Development Database: wildlife_tracker_test
+Table Names:animals, sightings
+```
 
-* Java 1.8.0_101
-* Gradle 3.0
-* JUnit 4.+
-* Spark 2.3
-* Velocity Template Engine 1.7
-* Postgresql 9.6
+## Running the tests
 
-## GitHub link
+`gradle test`
 
-https://github.com/ewajm/wildlife-tracker
+## Built With
 
-## Licensing
+* [Maven](https://maven.apache.org/) - Dependency Management
 
-* MIT
+## Authors
 
-Copyright (c) 2016 **_Ewa Manek_**
+* **Morris Warachi** - *Initial work* - [waracci](https://github.com/waracci)
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+
+## Acknowledgments
+
+* My Technical Mentor, Cornellius Ng'ondo
+* Moringa School
+* coffee
