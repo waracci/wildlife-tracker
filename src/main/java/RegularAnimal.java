@@ -25,7 +25,7 @@ public class RegularAnimal extends Animal {
         .throwOnMappingFailure(false)
         .executeAndFetchFirst(RegularAnimal.class);
       if(animal == null){
-        throw new IndexOutOfBoundsException("I'm sorry, I think this animal does not exist");
+        throw new IndexOutOfBoundsException("this animal does not exist");
       }
       return animal;
     }
